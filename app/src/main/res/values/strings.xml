@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Put on pompom</string>
-    <string name="base_weather_url" translatable="false">api.openweathermap.org/data/2.5/</string>
+    <string name="base_weather_url" translatable="false">api.openweathermap.org/data/2.5</string>
 </resources>

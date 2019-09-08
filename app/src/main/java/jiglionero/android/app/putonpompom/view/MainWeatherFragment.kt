@@ -1,4 +1,4 @@
-package jiglionero.android.app.putonpompom
+package jiglionero.android.app.putonpompom.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import jiglionero.android.app.putonpompom.R
 import jiglionero.android.app.putonpompom.databinding.MainWeatherFragmentBinding
+import jiglionero.android.app.putonpompom.view.model.WeatherViewModel
 
 
 class MainWeatherFragment : Fragment() {
@@ -17,16 +19,17 @@ class MainWeatherFragment : Fragment() {
         fun newInstance() = MainWeatherFragment()
     }
 
-    private lateinit var viewModel: MainWeatherViewModel
+    private lateinit var viewModel: WeatherViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.main_weather_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.main_weather_fragment, container, false)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainWeatherViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
         //Use the ViewModel
         binding.weatherViewModel = viewModel
     }

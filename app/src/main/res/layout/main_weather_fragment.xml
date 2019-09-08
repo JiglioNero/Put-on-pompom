@@ -7,14 +7,14 @@
 
         <variable
             name="weatherViewModel"
-            type="jiglionero.android.app.putonpompom.MainWeatherViewModel" />
+            type="jiglionero.android.app.putonpompom.view.model.WeatherViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainWeatherFragment">
+        tools:context=".view.MainWeatherFragment">
 
         <TextView
             android:id="@+id/date"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@{weatherViewModel.weather.tempF}"
+            android:text="@{String.valueOf(weatherViewModel.weatherResponse.mainWeatherParams.tempF)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="@{weatherViewModel.weather.tempFMin}"
+            android:text="@{String.valueOf(weatherViewModel.weatherResponse.mainWeatherParams.tempFMin)}"
             app:layout_constraintBottom_toBottomOf="@+id/temp"
             app:layout_constraintEnd_toStartOf="@+id/temp"
             app:layout_constraintTop_toTopOf="@+id/temp" />
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@{weatherViewModel.weather.tempFMax}"
+            android:text="@{String.valueOf(weatherViewModel.weatherResponse.mainWeatherParams.tempFMax)}"
             app:layout_constraintBottom_toBottomOf="@+id/temp"
             app:layout_constraintStart_toEndOf="@+id/temp"
             app:layout_constraintTop_toTopOf="@+id/temp" />
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
-            android:text="@{weatherViewModel.weather.humidity}"
+            android:text="@{String.valueOf(weatherViewModel.weatherResponse.mainWeatherParams.humidity)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{weatherViewModel.weather.pressure}"
+            android:text="@{String.valueOf(weatherViewModel.weatherResponse.mainWeatherParams.pressure)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/humidity" />
 
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{weatherViewModel.weather.clouds}"
+            android:text="@{String.valueOf(weatherViewModel.weatherResponse.cloudsParams.all)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pressure" />
 
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
-            android:text="@{weatherViewModel.weather.windSpeed}"
+            android:text="@{String.valueOf(weatherViewModel.weatherResponse.windParams.speed)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@{weatherViewModel.weather.windDeg}"
+            android:text="@{String.valueOf(weatherViewModel.weatherResponse.windParams.deg)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/wind_speed" />
 
@@ -111,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{weatherViewModel.weather.description}"
+            android:text="@{weatherViewModel.weatherResponse.weather.get(0).description}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date" />

@@ -3,7 +3,7 @@ package jiglionero.android.app.putonpompom.domain
 import com.google.gson.annotations.SerializedName
 
 class WeatherApiResponse(
-    @SerializedName("weather") var weather: ArrayList<Weather>,
+    @SerializedName("weather") var weather: List<Weather>,
     @SerializedName("base") var base: String,
     @SerializedName("main") var mainWeatherParams: WeatherMainParams,
     @SerializedName("wind") var windParams: WeatherWind,
