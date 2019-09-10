@@ -13,6 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var navController = Navigation.findNavController(this, R.id.main_nav)
+        //var navController = Navigation.findNavController(this, R.id.main_nav)
     }
 }
