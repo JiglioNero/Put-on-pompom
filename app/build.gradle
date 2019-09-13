@@ -26,10 +26,11 @@ android {
 }
 
 dependencies {
+    implementation group: 'com.google.android.gms', name: 'play-services-location', version: '17.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation group: 'com.google.dagger', name: 'dagger', version: '2.24'
     kapt 'com.google.dagger:dagger-compiler:2.24'
-    implementation group: 'androidx.lifecycle', name: 'lifecycle-livedata-ktx', version: '2.2.0-alpha03'
+    implementation group: 'androidx.lifecycle', name: 'lifecycle-livedata-ktx', version: '2.2.0-alpha04'
     implementation group: 'androidx.lifecycle', name: 'lifecycle-viewmodel-ktx', version: '2.2.0-alpha04'
     implementation group: 'android.arch.navigation', name: 'navigation-fragment-ktx', version: '1.0.0'
     implementation group: 'android.arch.navigation', name: 'navigation-ui-ktx', version: '1.0.0'
@@ -40,7 +41,7 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
