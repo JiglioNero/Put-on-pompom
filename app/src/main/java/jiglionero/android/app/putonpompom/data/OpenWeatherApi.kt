@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface OpenWeatherApi{
     @GET("weather")
-    fun getCurrentWeather(@Query("q") cityName:String, @Query("APPID") appId: String): Call<WeatherApiResponse>
+    fun getCurrentWeather(@Query("lat") latitude:Double, @Query("lon") longitude:Double, @Query("APPID") appId: String): Call<WeatherApiResponse>
 }

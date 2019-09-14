@@ -1,19 +1,41 @@
 package jiglionero.android.app.putonpompom.data
 
+import android.content.Intent
 import android.location.Location
-import android.location.LocationManager
+import androidx.lifecycle.MutableLiveData
+import jiglionero.android.app.putonpompom.PomPomApplication
+import jiglionero.android.app.putonpompom.domain.WeatherApiResponse
+import jiglionero.android.app.putonpompom.service.LocationService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class WeatherCaller(weatherApi: OpenWeatherApi, locationRequest: LocationRequest){
-    val weatherApi: OpenWeatherApi = weatherApi
-    val locationManager: LocationManager = locationManager
-    var location: Location
+class WeatherCaller(weatherApi: OpenWeatherApi, APPID: String){
+
+    private val weatherApi = weatherApi
+    var location: MutableLiveData<Location> = MutableLiveData()
+    var weatherApiResponse: MutableLiveData<WeatherApiResponse> = MutableLiveData()
 
     init {
-        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        location.observeForever {
+            weatherApi.getCurrentWeather(it.latitude, it.longitude, APPID).enqueue(object :Callback<WeatherApiResponse>{
+                override fun onResponse(
+                    call: Call<WeatherApiResponse>,
+                    response: Response<WeatherApiResponse>
+                ) {
+                    weatherApiResponse.value = response.body()
+                }
+
+                override fun onFailure(call: Call<WeatherApiResponse>, t: Throwable) {
+
+                }
+
+            })
+        }
+
+        PomPomApplication.instance.startService(Intent(PomPomApplication.instance, LocationService::class.java))
     }
 
-    fun getWeatherCall(){
-        locationManager.
-        weatherApi.getCurrentWeather()
-    }
+
+
 }
