@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/mainWeatherFragment"
-        android:name="jiglionero.android.app.putonpompom.view.MainWeatherFragment"
+        android:name="jiglionero.android.app.putonpompom.view.fragment.MainWeatherFragment"
         android:label="MainWeatherFragment" />
 </navigation>

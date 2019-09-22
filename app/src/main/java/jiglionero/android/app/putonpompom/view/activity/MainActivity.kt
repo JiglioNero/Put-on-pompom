@@ -1,10 +1,9 @@
-package jiglionero.android.app.putonpompom.view
+package jiglionero.android.app.putonpompom.view.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import jiglionero.android.app.putonpompom.R
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : PrototypeActivity() {
     //lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {

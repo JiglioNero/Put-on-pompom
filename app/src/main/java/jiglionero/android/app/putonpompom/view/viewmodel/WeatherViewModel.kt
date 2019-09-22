@@ -1,4 +1,4 @@
-package jiglionero.android.app.putonpompom.view.model
+package jiglionero.android.app.putonpompom.view.viewmodel
 
 
 import androidx.databinding.ObservableField

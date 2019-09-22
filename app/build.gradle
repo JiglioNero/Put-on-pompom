@@ -8,7 +8,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "jiglionero.android.app.putonpompom"
-        minSdkVersion 22
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -26,6 +26,7 @@ android {
 }
 
 dependencies {
+    implementation group: 'com.android.support', name: 'support-compat', version: '29.0.0'
     implementation group: 'com.google.android.gms', name: 'play-services-location', version: '17.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation group: 'com.google.dagger', name: 'dagger', version: '2.24'

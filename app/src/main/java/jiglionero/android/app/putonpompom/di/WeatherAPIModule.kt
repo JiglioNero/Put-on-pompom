@@ -16,10 +16,6 @@ class WeatherAPIModule {
     @Provides
     fun baseUrl() = PomPomApplication.instance.resources.getString(R.string.base_weather_url)
 
-    @Provides
-    @Named("appId")
-    fun appId() = PomPomApplication.instance.resources.getString(R.string.app_id)
-
     @Singleton
     @Provides
     fun getWeatherApi(retrofit: Retrofit): OpenWeatherApi {
@@ -28,7 +24,7 @@ class WeatherAPIModule {
 
     @Singleton
     @Provides
-    fun getWeatherCaller(openWeatherApi: OpenWeatherApi, baseUrl: String): WeatherCaller{
-        return WeatherCaller(openWeatherApi, baseUrl)
+    fun getWeatherCaller(openWeatherApi: OpenWeatherApi): WeatherCaller{
+        return WeatherCaller(openWeatherApi)
     }
 }

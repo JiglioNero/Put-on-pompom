@@ -1,4 +1,4 @@
-package jiglionero.android.app.putonpompom.view
+package jiglionero.android.app.putonpompom.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import jiglionero.android.app.putonpompom.R
 import jiglionero.android.app.putonpompom.databinding.MainWeatherFragmentBinding
-import jiglionero.android.app.putonpompom.view.model.WeatherViewModel
+import jiglionero.android.app.putonpompom.view.viewmodel.WeatherViewModel
 
 
 class MainWeatherFragment : Fragment() {

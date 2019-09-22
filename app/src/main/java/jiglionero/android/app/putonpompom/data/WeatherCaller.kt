@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class WeatherCaller(weatherApi: OpenWeatherApi, APPID: String){
+class WeatherCaller(weatherApi: OpenWeatherApi){
 
     private val weatherApi = weatherApi
     var location: MutableLiveData<Location> = MutableLiveData()
@@ -18,7 +18,7 @@ class WeatherCaller(weatherApi: OpenWeatherApi, APPID: String){
 
     init {
         location.observeForever {
-            weatherApi.getCurrentWeather(it.latitude, it.longitude, APPID).enqueue(object :Callback<WeatherApiResponse>{
+            weatherApi.getCurrentWeather(it.latitude, it.longitude).enqueue(object :Callback<WeatherApiResponse>{
                 override fun onResponse(
                     call: Call<WeatherApiResponse>,
                     response: Response<WeatherApiResponse>
