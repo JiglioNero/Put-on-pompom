@@ -2,7 +2,6 @@ package jiglionero.android.app.putonpompom.view.activity
 
 import android.os.Bundle
 import jiglionero.android.app.putonpompom.R
-
 class MainActivity : PrototypeActivity() {
     //lateinit var navController: NavController
 

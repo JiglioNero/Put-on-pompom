@@ -26,7 +26,6 @@ android {
 }
 
 dependencies {
-    implementation group: 'com.android.support', name: 'support-compat', version: '29.0.0'
     implementation group: 'com.google.android.gms', name: 'play-services-location', version: '17.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation group: 'com.google.dagger', name: 'dagger', version: '2.24'
