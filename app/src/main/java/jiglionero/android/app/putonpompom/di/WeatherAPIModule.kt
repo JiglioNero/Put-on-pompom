@@ -7,7 +7,6 @@ import jiglionero.android.app.putonpompom.R
 import jiglionero.android.app.putonpompom.data.OpenWeatherApi
 import jiglionero.android.app.putonpompom.data.WeatherCaller
 import retrofit2.Retrofit
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module

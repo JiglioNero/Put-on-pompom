@@ -8,5 +8,6 @@ abstract class PrototypeActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PomPomApplication.instance.currentActivity = this
+        actionBar?.setDisplayShowTitleEnabled(false)
     }
 }

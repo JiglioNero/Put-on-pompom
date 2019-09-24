@@ -18,7 +18,5 @@ class PomPomApplication : Application() {
         super.onCreate()
         instance = this
         weatherComponent = DaggerWeatherComponent.create()
-
-
     }
 }
