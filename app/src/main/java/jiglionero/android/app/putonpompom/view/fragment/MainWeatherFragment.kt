@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -34,18 +33,6 @@ class MainWeatherFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
         //Use the ViewModel
         binding.weatherViewModel = viewModel
-
-        binding.degreeSign.text = viewModel.degreesName.name
-        binding.degreeSign.setOnClickListener {
-            if(viewModel.degreesName == WeatherViewModel.DegreesName.C){
-                viewModel.degreesName = WeatherViewModel.DegreesName.F
-                (it as TextView).setText(R.string.fahrenheit)
-            }
-            else{
-                viewModel.degreesName = WeatherViewModel.DegreesName.C
-                (it as TextView).setText(R.string.celsiy)
-            }
-        }
     }
 
 }
