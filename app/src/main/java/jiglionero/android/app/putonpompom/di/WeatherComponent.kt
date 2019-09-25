@@ -1,8 +1,8 @@
 package jiglionero.android.app.putonpompom.di
 
 import dagger.Component
+import jiglionero.android.app.putonpompom.model.WeatherViewModel
 import jiglionero.android.app.putonpompom.service.LocationService
-import jiglionero.android.app.putonpompom.view.viewmodel.WeatherViewModel
 import javax.inject.Singleton
 
 @Singleton

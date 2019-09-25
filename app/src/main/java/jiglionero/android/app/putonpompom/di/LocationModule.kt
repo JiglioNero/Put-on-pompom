@@ -1,10 +1,12 @@
 package jiglionero.android.app.putonpompom.di
 
 import android.content.Context
+import android.location.Location
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
+import com.google.android.gms.tasks.Task
 import dagger.Module
 import dagger.Provides
 import jiglionero.android.app.putonpompom.data.WeatherCaller
@@ -29,6 +31,11 @@ class LocationModule {
                 }
             }
         }
+    }
+
+    @Provides
+    fun getLastLocation(client: FusedLocationProviderClient): Task<Location> {
+        return client.lastLocation
     }
 
     @Provides

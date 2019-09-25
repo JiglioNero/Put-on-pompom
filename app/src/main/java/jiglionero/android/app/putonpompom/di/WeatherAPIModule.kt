@@ -1,5 +1,7 @@
 package jiglionero.android.app.putonpompom.di
 
+import android.location.Location
+import com.google.android.gms.tasks.Task
 import dagger.Module
 import dagger.Provides
 import jiglionero.android.app.putonpompom.PomPomApplication
@@ -23,7 +25,7 @@ class WeatherAPIModule {
 
     @Singleton
     @Provides
-    fun getWeatherCaller(openWeatherApi: OpenWeatherApi): WeatherCaller{
-        return WeatherCaller(openWeatherApi)
+    fun getWeatherCaller(openWeatherApi: OpenWeatherApi, lastLocationTask: Task<Location>): WeatherCaller{
+        return WeatherCaller(openWeatherApi, lastLocationTask)
     }
 }

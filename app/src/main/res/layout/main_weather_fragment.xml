@@ -7,7 +7,7 @@
 
         <variable
             name="weatherViewModel"
-            type="jiglionero.android.app.putonpompom.view.viewmodel.WeatherViewModel" />
+            type="jiglionero.android.app.putonpompom.model.WeatherViewModel" />
 
     </data>
 
@@ -18,26 +18,16 @@
         tools:context=".view.fragment.MainWeatherFragment">
 
         <TextView
-            android:id="@+id/date"
-            style="@style/WeatherParamsText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="date"
-            app:layout_constraintEnd_toEndOf="@+id/temp"
-            app:layout_constraintStart_toStartOf="@+id/temp"
-            app:layout_constraintTop_toBottomOf="@+id/temp" />
-
-        <TextView
             android:id="@+id/temp"
             style="@style/CurrentTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:onClick="@{(view) -> weatherViewModel.switchDegreesName}"
-            android:text="@{String.valueOf((int)weatherViewModel.getFormatTemp(weatherViewModel.weatherResponse.mainWeatherParams.tempF))}"
+            android:text="@{String.valueOf((int)weatherViewModel.getFormatTemp())}"
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@{weatherViewModel.degreesName.name}"
+            android:text="@{weatherViewModel.degreesNameUse.name}"
             android:onClick="@{(view) -> weatherViewModel.switchDegreesName}"
             app:layout_constraintBottom_toBottomOf="@+id/temp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,65 +51,43 @@
             style="@style/WeatherParamsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
-            android:text="@{String.valueOf(weatherViewModel.weatherResponse.mainWeatherParams.humidity)}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            android:layout_marginEnd="32dp"
+            android:text="@{String.valueOf(weatherViewModel.weatherResponseCurrent.relativeHumidity)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/pressure"
             style="@style/WeatherParamsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@{String.valueOf(weatherViewModel.weatherResponse.mainWeatherParams.pressure)}"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@{String.valueOf(weatherViewModel.weatherResponseCurrent.pressure.metric.value)}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/humidity" />
-
-        <TextView
-            android:id="@+id/clouds"
-            style="@style/WeatherParamsText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@{String.valueOf(weatherViewModel.weatherResponse.cloudsParams.all)}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pressure" />
 
         <TextView
             android:id="@+id/wind_speed"
             style="@style/WeatherParamsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:text="@{String.valueOf(weatherViewModel.weatherResponse.windParams.speed)}"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@{String.valueOf(weatherViewModel.weatherResponseCurrent.wind.speed.metric.value)}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/pressure" />
 
         <TextView
-            android:id="@+id/wind_deg"
+            android:id="@+id/discribe"
             style="@style/WeatherParamsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@{String.valueOf(weatherViewModel.weatherResponse.windParams.deg)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/wind_speed" />
-
-        <TextView
-            android:id="@+id/textView"
-            style="@style/WeatherParamsText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{weatherViewModel.weatherResponse.weather.get(0).description}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date" />
+            android:layout_marginTop="16dp"
+            android:text="@{weatherViewModel.weatherResponseCurrent.weatherText}"
+            app:layout_constraintEnd_toEndOf="@+id/temp"
+            app:layout_constraintStart_toStartOf="@+id/temp"
+            app:layout_constraintTop_toBottomOf="@+id/temp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

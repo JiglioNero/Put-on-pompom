@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import jiglionero.android.app.putonpompom.R
 import jiglionero.android.app.putonpompom.databinding.MainWeatherFragmentBinding
-import jiglionero.android.app.putonpompom.view.viewmodel.WeatherViewModel
+import jiglionero.android.app.putonpompom.model.WeatherViewModel
 
 
 class MainWeatherFragment : Fragment() {

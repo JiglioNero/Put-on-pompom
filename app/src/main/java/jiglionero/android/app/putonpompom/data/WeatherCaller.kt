@@ -1,41 +1,29 @@
 package jiglionero.android.app.putonpompom.data
 
-import android.content.Intent
 import android.location.Location
 import androidx.lifecycle.MutableLiveData
-import jiglionero.android.app.putonpompom.PomPomApplication
-import jiglionero.android.app.putonpompom.domain.WeatherApiResponse
-import jiglionero.android.app.putonpompom.service.LocationService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.google.android.gms.tasks.Task
+import jiglionero.android.app.putonpompom.domain.location.LocationByApi
+import jiglionero.android.app.putonpompom.domain.weather.current.WeatherApiResponseCurrent
 
-class WeatherCaller(weatherApi: OpenWeatherApi){
+class WeatherCaller(private val weatherApi: OpenWeatherApi, lastLocationTask: Task<Location>){
 
-    private val weatherApi = weatherApi
     var location: MutableLiveData<Location> = MutableLiveData()
-    var weatherApiResponse: MutableLiveData<WeatherApiResponse> = MutableLiveData()
+    var locationByApi: MutableLiveData<LocationByApi> = MutableLiveData()
+    var weatherApiResponseCurrent: MutableLiveData<WeatherApiResponseCurrent> = MutableLiveData()
 
     init {
-        location.observeForever {
-            weatherApi.getCurrentWeather(it.latitude, it.longitude).enqueue(object :Callback<WeatherApiResponse>{
-                override fun onResponse(
-                    call: Call<WeatherApiResponse>,
-                    response: Response<WeatherApiResponse>
-                ) {
-                    weatherApiResponse.value = response.body()
-                }
-
-                override fun onFailure(call: Call<WeatherApiResponse>, t: Throwable) {
-
-                }
-
-            })
+        lastLocationTask.addOnCompleteListener {
+            location.value = it.result
         }
 
-        PomPomApplication.instance.startService(Intent(PomPomApplication.instance, LocationService::class.java))
+        location.observeForever {
+            weatherApi.getLocationByApi("${it.latitude},${it.longitude}").enqueue(MutableLiveDataCallback(locationByApi))
+        }
+
+        locationByApi.observeForever {
+            weatherApi.getCurrentWeather(it.Key).enqueue(MutableLiveDataCallback(weatherApiResponseCurrent))
+        }
     }
-
-
 
 }
