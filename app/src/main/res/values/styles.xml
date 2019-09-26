@@ -37,9 +37,20 @@
     <style name="WeatherParamsText" parent="CurrentTemp">
         <item name="android:textSize">15sp</item>
     </style>
+
+
     <style name="DegSign" parent="OtherWhiteText">
         <item name="android:textSize">25sp</item>
         <item name="android:drawableStart">@drawable/deg_icon</item>
+    </style>
+    <style name="HumidityText" parent="OtherWhiteText">
+        <item name="android:drawableStart">@drawable/humidity_icon</item>
+    </style>
+    <style name="PressureText" parent="OtherWhiteText">
+        <item name="android:drawableStart">@drawable/pressure_icon</item>
+    </style>
+    <style name="WindText" parent="OtherWhiteText">
+        <item name="android:drawableStart">@drawable/wind_icon</item>
     </style>
 
 
