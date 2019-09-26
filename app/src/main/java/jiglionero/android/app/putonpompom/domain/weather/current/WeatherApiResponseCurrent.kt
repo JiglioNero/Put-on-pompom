@@ -1,6 +1,7 @@
 package jiglionero.android.app.putonpompom.domain.weather.current
 
 import androidx.annotation.NonNull
+import jiglionero.android.app.putonpompom.domain.weather.WeatherApiResponse
 
 data class WeatherApiResponseCurrent(
     @NonNull val ApparentTemperature: ApparentTemperature = ApparentTemperature(),
@@ -29,9 +30,9 @@ data class WeatherApiResponseCurrent(
     @NonNull val UVIndexText: String = "",
     @NonNull val Visibility: Visibility = Visibility(),
     @NonNull val WeatherIcon: Int = 0,
-    @NonNull val WeatherText: String = "",
+    @NonNull val WeatherText: String = "weather text",
     @NonNull val WetBulbTemperature: WetBulbTemperature = WetBulbTemperature(),
     @NonNull val Wind: Wind = Wind(),
     @NonNull val WindChillTemperature: WindChillTemperature = WindChillTemperature(),
     @NonNull val WindGust: WindGust = WindGust()
-)
+): WeatherApiResponse

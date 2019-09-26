@@ -2,10 +2,12 @@ package jiglionero.android.app.putonpompom
 
 import android.app.Activity
 import android.app.Application
-import android.content.Intent
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import jiglionero.android.app.putonpompom.di.DaggerWeatherComponent
 import jiglionero.android.app.putonpompom.di.WeatherComponent
-import jiglionero.android.app.putonpompom.service.LocationService
+import javax.inject.Inject
+
 
 class PomPomApplication : Application() {
     companion object {
@@ -13,6 +15,7 @@ class PomPomApplication : Application() {
     }
     lateinit var weatherComponent: WeatherComponent
     lateinit var currentActivity: Activity
+    @Inject lateinit var locationPeriodicRequest: PeriodicWorkRequest
 
 
 
@@ -20,7 +23,8 @@ class PomPomApplication : Application() {
         super.onCreate()
         instance = this
         weatherComponent = DaggerWeatherComponent.create()
+        weatherComponent.inject(this)
 
-        startService(Intent(this, LocationService::class.java))
+        WorkManager.getInstance().enqueue(locationPeriodicRequest)
     }
 }

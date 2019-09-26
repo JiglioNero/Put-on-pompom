@@ -1,65 +1,59 @@
 package jiglionero.android.app.putonpompom.service
 
 import android.Manifest
+import android.app.NotificationManager
 import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.net.ConnectivityManager
-import android.net.Network
-import android.os.Build
 import android.os.Looper
 import android.util.Log
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.LifecycleService
+import androidx.core.app.NotificationCompat
+import androidx.work.Worker
+import androidx.work.WorkerParameters
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import jiglionero.android.app.putonpompom.PomPomApplication
-import jiglionero.android.app.putonpompom.data.NetworkUtil
-import jiglionero.android.app.putonpompom.receiver.NetworkChangeReceiver
+import jiglionero.android.app.putonpompom.R
 import javax.inject.Inject
 
-class LocationService : LifecycleService() {
-
+class LocationPeriodicWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
     @Inject
     lateinit var locationCallback: LocationCallback
     @Inject
     lateinit var locationRequest: LocationRequest
     @Inject
     lateinit var locationClient: FusedLocationProviderClient
-    var isOnUpdates = false
 
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+    init {
         PomPomApplication.instance.weatherComponent.inject(this)
-        val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            connectivityManager.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
-                override fun onAvailable(network: Network) {
-                    startLocationUpdates()
-                }
-                override fun onLost(network: Network?) {
-                    stopLocationUpdates()
-                }
-            })
-        }
-        else {
-            registerReceiver(
-                NetworkChangeReceiver(),
-                IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
-            )
-        }
-        tryToGetAccess()
-        if(isGetPermission() && !isOnUpdates && NetworkUtil.getConnectivityStatusString(this) != NetworkUtil.NETWORK_STATUS_NOT_CONNECTED){
-            startLocationUpdates()
-        }
-        return super.onStartCommand(intent, flags, startId)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if(isOnUpdates) {
-            stopLocationUpdates()
+    override fun doWork(): Result {
+        tryToGetAccess()
+        if(isGetPermission()){
+            startLocationUpdates()
+        }
+
+        val notificationManager =
+            PomPomApplication.instance.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
+        notificationManager!!.notify(1,
+            NotificationCompat.Builder(PomPomApplication.instance)
+                .setSmallIcon(R.drawable.deg_icon)
+                .setContentTitle("Title")
+                .setContentText("Notification text")
+                .build())
+        return Result.success()
+    }
+
+    fun startLocationUpdates() {
+        if(isGetPermission()) {
+            Log.e("Location", "Start location update")
+            locationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                Looper.getMainLooper()
+            )
         }
     }
 
@@ -105,26 +99,6 @@ class LocationService : LifecycleService() {
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ), 1
             )
-        }
-    }
-
-    fun stopLocationUpdates() {
-        if(isOnUpdates) {
-            Log.e("Location", "Stop location update")
-            locationClient.removeLocationUpdates(locationCallback)
-            isOnUpdates = false
-        }
-    }
-
-    fun startLocationUpdates() {
-        if(!isOnUpdates) {
-            Log.e("Location", "Start location update")
-            locationClient.requestLocationUpdates(
-                locationRequest,
-                locationCallback,
-                Looper.getMainLooper()
-            )
-            isOnUpdates = true
         }
     }
 

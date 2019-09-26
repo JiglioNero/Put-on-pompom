@@ -5,6 +5,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import jiglionero.android.app.putonpompom.PomPomApplication
 import jiglionero.android.app.putonpompom.data.WeatherCaller
+import jiglionero.android.app.putonpompom.domain.weather.WeatherApiResponse
 import jiglionero.android.app.putonpompom.domain.weather.current.WeatherApiResponseCurrent
 
 import javax.inject.Inject
@@ -38,12 +39,14 @@ class WeatherViewModel : ViewModel() {
         return degreesNameUse
     }
 
-    fun getFormatTemp() : Double{
-        weatherResponseCurrent.get()?.let {
-            return when(degreesNameUse.get()){
-                DegreesName.C -> it.Temperature.Metric.Value
-                DegreesName.F -> it.Temperature.Imperial.Value
-                else -> -273.15
+    fun getFormatTemp(weatherApiResponse: WeatherApiResponse?) : Double{
+        if(weatherApiResponse is WeatherApiResponseCurrent) {
+            weatherResponseCurrent.get()?.let {
+                return when (degreesNameUse.get()) {
+                    DegreesName.C -> it.Temperature.Metric.Value
+                    DegreesName.F -> it.Temperature.Imperial.Value
+                    else -> -273.15
+                }
             }
         }
         return -273.15

@@ -1,5 +1,7 @@
 package jiglionero.android.app.putonpompom.domain.weather.forecast
 
+import jiglionero.android.app.putonpompom.domain.weather.WeatherApiResponse
+
 data class WeatherApiResponseForecast12H(
     val Ceiling: Ceiling = Ceiling(),
     val CloudCover: Int = 0,
@@ -29,4 +31,4 @@ data class WeatherApiResponseForecast12H(
     val WetBulbTemperature: WetBulbTemperature = WetBulbTemperature(),
     val Wind: Wind = Wind(),
     val WindGust: WindGust = WindGust()
-)
+): WeatherApiResponse

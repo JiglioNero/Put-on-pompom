@@ -1,18 +1,28 @@
 package jiglionero.android.app.putonpompom.data
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MutableLiveDataCallback<T>(var liveData: MutableLiveData<T>): Callback<T> {
+class MutableLiveDataCallback<T>(var liveData: MutableLiveData<T>, var ob: T): Callback<T> {
 
     override fun onFailure(call: Call<T>, t: Throwable) {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.e("Callback", ""+ t.message)
+        liveData.value = ob
     }
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
-        liveData.value = response.body()
+        if(response.body()!=null) {
+            liveData.value = response.body()
+        }
+        else{
+            liveData.value = ob
+            when(response.code()){
+                503 -> Log.e("Callback", "End of messages count.")
+            }
+        }
     }
 
 }
