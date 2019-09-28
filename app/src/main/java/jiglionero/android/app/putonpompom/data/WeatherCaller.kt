@@ -21,7 +21,7 @@ class WeatherCaller(private val weatherApi: OpenWeatherApi){
 
         locationByApi.observeForever {
             weatherApi.getCurrentWeather(it.Key).enqueue(MutableLiveDataCallback(weatherApiResponseCurrent, WeatherApiResponseCurrent()))
-            weatherApi.get12HourForecastWeather(it.Key).enqueue(MutableLiveDataCallback(weatherApiResponseForecast12H, WeatherApiResponseForecast12H()))
+            //weatherApi.get12HourForecastWeather(it.Key).enqueue(MutableLiveDataCallback(weatherApiResponseForecast12H, WeatherApiResponseForecast12H()))
         }
     }
 

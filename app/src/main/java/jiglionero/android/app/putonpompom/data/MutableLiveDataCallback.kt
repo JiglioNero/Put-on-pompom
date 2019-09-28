@@ -14,14 +14,11 @@ class MutableLiveDataCallback<T>(var liveData: MutableLiveData<T>, var ob: T): C
     }
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
-        if(response.body()!=null) {
+        if(response.code() == 200) {
             liveData.value = response.body()
         }
         else{
             liveData.value = ob
-            when(response.code()){
-                503 -> Log.e("Callback", "End of messages count.")
-            }
         }
     }
 

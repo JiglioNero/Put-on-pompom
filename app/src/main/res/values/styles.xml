@@ -54,10 +54,8 @@
     </style>
 
 
-    <style name="Background">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@drawable/day_back_gradient</item>
+    <style name="PerHourList">
+        <item name="android:background">@drawable/allday_back_gradient</item>
     </style>
 
 

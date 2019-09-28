@@ -41,13 +41,11 @@ class WeatherViewModel : ViewModel() {
 
     fun getFormatTemp(weatherApiResponse: WeatherApiResponse?) : Double{
         if(weatherApiResponse is WeatherApiResponseCurrent) {
-            weatherResponseCurrent.get()?.let {
                 return when (degreesNameUse.get()) {
-                    DegreesName.C -> it.Temperature.Metric.Value
-                    DegreesName.F -> it.Temperature.Imperial.Value
+                    DegreesName.C -> weatherApiResponse.Temperature.Metric.Value
+                    DegreesName.F -> weatherApiResponse.Temperature.Imperial.Value
                     else -> -273.15
                 }
-            }
         }
         return -273.15
     }
