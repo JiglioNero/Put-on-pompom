@@ -1,18 +1,19 @@
 package jiglionero.android.app.putonpompom.model
 
-import androidx.databinding.*
+import androidx.databinding.Observable
+import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableList
 import androidx.lifecycle.ViewModel
 import jiglionero.android.app.putonpompom.PomPomApplication
-import jiglionero.android.app.putonpompom.data.WeatherCaller
+import jiglionero.android.app.putonpompom.data.DataNode
 import jiglionero.android.app.putonpompom.domain.OneWeather
 import jiglionero.android.app.putonpompom.domain.WeatherApiResponse
 import javax.inject.Inject
 
 abstract class WeatherViewModel: ViewModel() {
     @Inject
-    lateinit var weatherCaller: WeatherCaller
-    @Inject
-    lateinit var listChangeRegistry: ListChangeRegistry
+    lateinit var dataNode: DataNode
     var weatherApiResponse: ObservableField<WeatherApiResponse> = ObservableField()
     var oneWeatherList: ObservableList<OneWeather> = ObservableArrayList()
 

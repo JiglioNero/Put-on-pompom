@@ -14,7 +14,7 @@ data class WeatherApiResponseCurrent(
     val name: String = "",
     val sys: Sys = Sys(),
     val timezone: Int = 0,
-    val weather: List<Weather> = listOf(),
+    val weather: List<Weather> = listOf(Weather()),
     val wind: Wind = Wind()
 ): OneWeather(), WeatherApiResponse {
 

@@ -1,6 +1,5 @@
 package jiglionero.android.app.putonpompom.domain
 
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 
 abstract class OneWeather {
@@ -36,6 +35,26 @@ abstract class OneWeather {
         }
         return degreesNameUse
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        var otherWeather = other as OneWeather
+        if(getFormatTemp().equals(otherWeather.getFormatTemp())) return false
+        if(getHumidity() == otherWeather.getHumidity()) return false
+        if(getPressure().equals(otherWeather.getPressure())) return false
+        if(getWindSpeed().equals(otherWeather.getWindSpeed())) return false
+        if(getWeatherName() == otherWeather.getWeatherName()) return false
+        if(getWeatherDescribe() == otherWeather.getWeatherDescribe()) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return javaClass.hashCode()
+    }
+
 
     enum class DegreesName {
         F, C
