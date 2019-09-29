@@ -55,7 +55,8 @@
 
 
     <style name="PerHourList">
-        <item name="android:background">@drawable/allday_back_gradient</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:background">@drawable/corner_15</item>
     </style>
 
 

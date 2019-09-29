@@ -2,6 +2,7 @@ package jiglionero.android.app.putonpompom.di
 
 import dagger.Component
 import jiglionero.android.app.putonpompom.PomPomApplication
+import jiglionero.android.app.putonpompom.model.WeatherCurrentViewModel
 import jiglionero.android.app.putonpompom.model.WeatherViewModel
 import jiglionero.android.app.putonpompom.service.LocationPeriodicWorker
 import javax.inject.Singleton

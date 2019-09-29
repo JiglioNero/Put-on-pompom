@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Put on pompom</string>
-    <string name="app_id" translatable="false">MKDUZ9wtcmIEzHooVI8BdmHxukwx1NnD</string>
-    <string name="base_weather_url" translatable="false">http://dataservice.accuweather.com/</string>
+    <string name="app_id" translatable="false">e701799ce287e27435705e293e56f97c</string>
+    <string name="base_weather_url" translatable="false">http://api.openweathermap.org/data/2.5/</string>
     <string name="celsiy" translatable="false">C</string>
     <string name="fahrenheit" translatable="false">F</string>
+
 </resources>

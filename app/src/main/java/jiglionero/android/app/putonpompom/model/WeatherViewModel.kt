@@ -1,56 +1,41 @@
 package jiglionero.android.app.putonpompom.model
 
-import androidx.databinding.Observable
-import androidx.databinding.ObservableField
+import androidx.databinding.*
 import androidx.lifecycle.ViewModel
 import jiglionero.android.app.putonpompom.PomPomApplication
 import jiglionero.android.app.putonpompom.data.WeatherCaller
-import jiglionero.android.app.putonpompom.domain.weather.WeatherApiResponse
-import jiglionero.android.app.putonpompom.domain.weather.current.WeatherApiResponseCurrent
-
+import jiglionero.android.app.putonpompom.domain.OneWeather
+import jiglionero.android.app.putonpompom.domain.WeatherApiResponse
 import javax.inject.Inject
 
-
-class WeatherViewModel : ViewModel() {
-
-    var weatherResponseCurrent: ObservableField<WeatherApiResponseCurrent?>
-    var degreesNameUse = ObservableField(DegreesName.C)
-    @Inject lateinit var weatherCaller: WeatherCaller
+abstract class WeatherViewModel: ViewModel() {
+    @Inject
+    lateinit var weatherCaller: WeatherCaller
+    @Inject
+    lateinit var listChangeRegistry: ListChangeRegistry
+    var weatherApiResponse: ObservableField<WeatherApiResponse> = ObservableField()
+    var oneWeatherList: ObservableList<OneWeather> = ObservableArrayList()
 
     init {
         PomPomApplication.instance.weatherComponent.inject(this)
-        weatherResponseCurrent = ObservableField(weatherCaller.weatherApiResponseCurrent.value)
-        weatherCaller.weatherApiResponseCurrent.observeForever {
-            weatherResponseCurrent.set(it)
-        }
-        degreesNameUse.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback(){
+        this.initObservable()
+        this.initObserveResponse()
+        weatherApiResponse.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback(){
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                weatherResponseCurrent.notifyChange()
-            }
-        })
-    }
-
-    fun switchDegreesName(): ObservableField<DegreesName>{
-        if(degreesNameUse.get() == DegreesName.C){
-            degreesNameUse.set(DegreesName.F)
-        } else{
-            degreesNameUse.set(DegreesName.C)
-        }
-        return degreesNameUse
-    }
-
-    fun getFormatTemp(weatherApiResponse: WeatherApiResponse?) : Double{
-        if(weatherApiResponse is WeatherApiResponseCurrent) {
-                return when (degreesNameUse.get()) {
-                    DegreesName.C -> weatherApiResponse.Temperature.Metric.Value
-                    DegreesName.F -> weatherApiResponse.Temperature.Imperial.Value
-                    else -> -273.15
+                oneWeatherList.clear()
+                weatherApiResponse.get()?.let {
+                    oneWeatherList.addAll(it.getOneWeatherList())
                 }
+            }
+
+        })
+        OneWeather.degreesNameUse.observeForever{
+            weatherApiResponse.notifyChange()
         }
-        return -273.15
     }
 
-    enum class DegreesName{
-        F,C
-    }
+    abstract fun initObservable()
+
+    abstract fun initObserveResponse()
+
 }
