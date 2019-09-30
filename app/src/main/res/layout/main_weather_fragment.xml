@@ -1,22 +1,30 @@
-<android:com.sothree.slidinguppanel.SlidingUpPanelLayout
-    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    sothree:umanoPanelHeight="68dp"
-    sothree:umanoShadowHeight="4dp"
-    layout_height="match_parent"
-    layout_width="match_parent">
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
-    <fragment
-        android:id="@+id/fragment2"
-        android:name="jiglionero.android.app.putonpompom.view.fragment.CurrentFragment"
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        android:id="@+id/sliding_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        sothree:umanoPanelHeight="10dp"
+        sothree:umanoShadowHeight="4dp">
 
-    <fragment
-        android:id="@+id/fragment3"
-        android:name="jiglionero.android.app.putonpompom.view.fragment.ForecastPerHourFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
 
-</android:com.sothree.slidinguppanel.SlidingUpPanelLayout>
+        <fragment
+            android:id="@+id/current_fragment"
+            android:name="jiglionero.android.app.putonpompom.view.fragment.CurrentFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <fragment
+            android:id="@+id/forecast_fragment"
+            android:name="jiglionero.android.app.putonpompom.view.fragment.ForecastPerHourFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

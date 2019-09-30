@@ -32,6 +32,7 @@ class CurrentFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(WeatherCurrentViewModel::class.java)
         //Use the ViewModel
+        viewModel.initObserveResponse(this)
         binding.weatherCurrentViewModel = viewModel
     }
 

@@ -2,8 +2,8 @@ package jiglionero.android.app.putonpompom.di
 
 import dagger.Component
 import jiglionero.android.app.putonpompom.PomPomApplication
+import jiglionero.android.app.putonpompom.model.WeatherCurrentViewModel
 import jiglionero.android.app.putonpompom.model.WeatherPerHourForecastViewModel
-import jiglionero.android.app.putonpompom.model.WeatherViewModel
 import jiglionero.android.app.putonpompom.service.LocationPeriodicWorker
 import javax.inject.Singleton
 
@@ -17,7 +17,7 @@ import javax.inject.Singleton
     DataModule::class,
     RecyclerModule::class])
 interface WeatherComponent {
-    fun inject(weatherViewModel: WeatherViewModel)
+    fun inject(weatherViewModel: WeatherCurrentViewModel)
     fun inject(locationWorker: LocationPeriodicWorker)
     fun inject(pomPomApplication: PomPomApplication)
     fun inject(weatherPerHourForecastViewModel: WeatherPerHourForecastViewModel)

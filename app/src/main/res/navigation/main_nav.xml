@@ -3,10 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/mainWeatherFragment">
+    app:startDestination="@id/forecastPerHourFragment2">
     <fragment
         android:id="@+id/mainWeatherFragment"
         android:name="jiglionero.android.app.putonpompom.view.fragment.MainWeatherFragment"
-        android:label="main_weather_fragment"
-        tools:layout="@layout/main_weather_fragment" />
+        android:label="MainWeatherFragment" />
+    <fragment
+        android:id="@+id/forecastPerHourFragment2"
+        android:name="jiglionero.android.app.putonpompom.view.fragment.ForecastPerHourFragment"
+        android:label="forecast_per_hour_fragment"
+        tools:layout="@layout/forecast_per_hour_fragment" />
 </navigation>
