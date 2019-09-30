@@ -7,7 +7,7 @@ import jiglionero.android.app.putonpompom.domain.current.Wind
 
 data class WeatherCurrent(
     val clouds: Clouds = Clouds(),
-    val dt: Int = 0,
+    val dt: Long = 0,
     val dt_txt: String = "",
     val main: Main = Main(),
     val rain: Rain = Rain(),
@@ -15,6 +15,10 @@ data class WeatherCurrent(
     val weather: List<Weather> = listOf(),
     val wind: Wind = Wind()
 ): OneWeather() {
+    override fun getDate(): Long {
+        return dt
+    }
+
     override fun getWeatherName(): String {
         return weather[0].main
     }

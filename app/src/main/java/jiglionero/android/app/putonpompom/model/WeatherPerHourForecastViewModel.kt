@@ -32,5 +32,9 @@ class WeatherPerHourForecastViewModel : ViewModel() {
         pagedList.observe(lifeCycleOwner, Observer {
             weatherAdapter.submitList(it)
         })
+
+        OneWeather.degreesNameUse.observe(lifeCycleOwner, Observer {
+            weatherAdapter.notifyDataSetChanged()
+        })
     }
 }

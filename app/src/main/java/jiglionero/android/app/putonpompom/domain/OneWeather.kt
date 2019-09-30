@@ -1,19 +1,30 @@
 package jiglionero.android.app.putonpompom.domain
 
 import androidx.lifecycle.MutableLiveData
+import java.text.SimpleDateFormat
+import java.util.*
 
 abstract class OneWeather {
     companion object{
         var degreesNameUse = MutableLiveData(DegreesName.C)
     }
 
-    abstract fun getTemp(): Double
+    protected abstract fun getTemp(): Double
 
     abstract fun getPressure(): Double
     abstract fun getHumidity(): Int
     abstract fun getWindSpeed(): Double
     abstract fun getWeatherName(): String
     abstract fun getWeatherDescribe(): String
+    protected abstract fun getDate():Long
+
+    fun getFormatTime(): String{
+        return SimpleDateFormat("HH:mm").format(Date(getDate()*1000))
+    }
+
+    fun getFormatDate(): String{
+        return SimpleDateFormat("dd:MMMM").format(Date(getDate()*1000))
+    }
 
     fun getFormatTemp(): Double {
         return when (degreesNameUse.value) {

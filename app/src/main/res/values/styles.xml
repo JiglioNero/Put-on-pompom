@@ -5,6 +5,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowActionBarOverlay">true</item>
 
         <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -21,11 +22,6 @@
 
     <style name="OtherWhiteText">
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/colorText</item>
-        <item name="android:shadowColor">@color/colorTextShadow</item>
-        <item name="android:shadowDx">3</item>
-        <item name="android:shadowDy">3</item>
-        <item name="android:shadowRadius">10</item>
     </style>
     <style name="CurrentTemp" parent="OtherWhiteText">
         <item name="android:inputType">number</item>
@@ -53,10 +49,12 @@
         <item name="android:drawableStart">@drawable/wind_icon</item>
     </style>
 
-
     <style name="PerHourList">
-        <item name="android:backgroundTint">@color/colorPrimary</item>
-        <item name="android:background">@drawable/corner_15</item>
+
+    </style>
+
+    <style name="WeatherData" parent="OtherWhiteText">
+        <item name="android:inputType">time</item>
     </style>
 
 

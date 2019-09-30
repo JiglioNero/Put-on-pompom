@@ -1,30 +1,58 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:sothree="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
 
-    <com.sothree.slidinguppanel.SlidingUpPanelLayout
-        android:id="@+id/sliding_layout"
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:sothree="http://schemas.android.com/apk/res-auto"
+android:layout_height="match_parent"
+android:layout_width="match_parent">
+
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+    android:id="@+id/sliding_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    sothree:umanoFadeColor="@android:color/transparent"
+    android:gravity="bottom"
+    sothree:umanoPanelHeight="20dp"
+    sothree:umanoShadowHeight="4dp"
+    sothree:umanoAnchorPoint="0.7"
+    sothree:umanoOverlay="false"
+    sothree:umanoScrollableView="@id/forecast_fragment"
+    sothree:umanoDragView="@id/dragView">
+
+
+    <fragment
+        android:id="@+id/current_fragment"
+        android:name="jiglionero.android.app.putonpompom.view.fragment.CurrentFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom"
-        sothree:umanoPanelHeight="10dp"
-        sothree:umanoShadowHeight="4dp">
-
-
-        <fragment
-            android:id="@+id/current_fragment"
-            android:name="jiglionero.android.app.putonpompom.view.fragment.CurrentFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        sothree:layout_constraintEnd_toEndOf="parent"
+        sothree:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorPrimaryDark">
 
         <fragment
             android:id="@+id/forecast_fragment"
             android:name="jiglionero.android.app.putonpompom.view.fragment.ForecastPerHourFragment"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            sothree:layout_constraintBottom_toBottomOf="parent"
+            sothree:layout_constraintEnd_toEndOf="parent"
+            sothree:layout_constraintStart_toStartOf="parent"
+            sothree:layout_constraintTop_toBottomOf="@+id/dragView" />
 
-    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+        <ImageView
+            android:id="@+id/dragView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            sothree:layout_constraintEnd_toEndOf="parent"
+            sothree:layout_constraintStart_toStartOf="parent"
+            sothree:layout_constraintTop_toTopOf="parent"
+            sothree:srcCompat="@drawable/drag_icon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
