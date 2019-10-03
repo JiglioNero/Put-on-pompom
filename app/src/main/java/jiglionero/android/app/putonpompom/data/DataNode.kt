@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import jiglionero.android.app.putonpompom.domain.current.WeatherApiResponseCurrent
 import jiglionero.android.app.putonpompom.domain.forecast.WeatherApiResponseForecast5D3H
 
-class DataNode(private val weatherApi: OpenWeatherApi){
+class DataNode(private val weatherApi: OpenWeatherApi, private val database: WeatherDatabase){
 
     var location: MutableLiveData<Location> = MutableLiveData()
 

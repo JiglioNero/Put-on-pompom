@@ -1,13 +1,15 @@
 package jiglionero.android.app.putonpompom.domain.forecast
 
+import androidx.room.Relation
 import jiglionero.android.app.putonpompom.domain.OneWeather
 import jiglionero.android.app.putonpompom.domain.current.Clouds
 import jiglionero.android.app.putonpompom.domain.current.Weather
 import jiglionero.android.app.putonpompom.domain.current.Wind
+import jiglionero.android.app.putonpompom.domain.room.OneWeatherEntity
 
 data class WeatherCurrent(
     val clouds: Clouds = Clouds(),
-    val dt: Long = 0,
+    val dt: Int = 0,
     val dt_txt: String = "",
     val main: Main = Main(),
     val rain: Rain = Rain(),
@@ -15,6 +17,13 @@ data class WeatherCurrent(
     val weather: List<Weather> = listOf(),
     val wind: Wind = Wind()
 ): OneWeather() {
+    fun toEntity(): OneWeatherEntity{
+        return OneWeatherEntity().apply {
+            dt = this@WeatherCurrent.dt
+
+        }
+    }
+
     override fun getDate(): Long {
         return dt
     }
