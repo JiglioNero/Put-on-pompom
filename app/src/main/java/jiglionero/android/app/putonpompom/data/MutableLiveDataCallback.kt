@@ -9,7 +9,7 @@ import retrofit2.Response
 class MutableLiveDataCallback<T>(var liveData: MutableLiveData<T>, var ob: T): Callback<T> {
 
     override fun onFailure(call: Call<T>, t: Throwable) {
-        Log.e("Callback", ""+ t.message)
+        Log.e("Callback Failure", ""+ t.message)
         liveData.value = ob
     }
 

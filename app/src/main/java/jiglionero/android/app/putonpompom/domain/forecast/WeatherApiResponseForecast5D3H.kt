@@ -7,7 +7,7 @@ data class WeatherApiResponseForecast5D3H(
     val city: City = City(),
     val cnt: Int = 0,
     val cod: String = "",
-    val list: List<WeatherCurrent> = listOf(),
+    val list: ArrayList<WeatherCurrent> = arrayListOf(WeatherCurrent()),
     val message: Double = 0.0
 ): WeatherApiResponse {
     override fun getOneWeatherList(): List<OneWeather> {

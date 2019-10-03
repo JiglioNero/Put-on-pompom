@@ -25,7 +25,7 @@ class WeatherPerHourForecastViewModel : ViewModel() {
     }
 
     fun initObserveResponse(lifeCycleOwner: LifecycleOwner) {
-        dataNode.weatherApiResponseForecast5D3H.observe(lifeCycleOwner, Observer{
+        dataNode.forecastList.observe(lifeCycleOwner, Observer{
             pagedList.value?.dataSource?.invalidate()
         })
 

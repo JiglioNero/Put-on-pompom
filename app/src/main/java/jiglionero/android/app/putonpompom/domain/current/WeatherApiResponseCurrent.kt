@@ -2,6 +2,7 @@ package jiglionero.android.app.putonpompom.domain.current
 
 import jiglionero.android.app.putonpompom.domain.OneWeather
 import jiglionero.android.app.putonpompom.domain.WeatherApiResponse
+import jiglionero.android.app.putonpompom.domain.forecast.WeatherCurrent
 
 data class WeatherApiResponseCurrent(
     val base: String = "",
@@ -14,11 +15,36 @@ data class WeatherApiResponseCurrent(
     val name: String = "",
     val sys: Sys = Sys(),
     val timezone: Int = 0,
-    val weather: List<Weather> = listOf(Weather()),
+    val weather: ArrayList<Weather> = arrayListOf(Weather()),
     val wind: Wind = Wind()
 ): OneWeather(), WeatherApiResponse {
+    fun toWeatherCurrent(): WeatherCurrent{
+        return WeatherCurrent(
+            clouds = clouds,
+            dt = dt,
+            main = jiglionero.android.app.putonpompom.domain.forecast.Main(
+                humidity = main.humidity,
+                pressure = main.pressure,
+                temp = main.temp,
+                temp_max = main.temp_max,
+                temp_min = main.temp_min
+            ),
+            weather = weather,
+            wind = wind
+        )
+    }
+
+    override fun getWeathers(): List<Weather> {
+        return weather
+    }
+
+    override fun setWeather(weatherList: List<Weather>) {
+        weather.clear()
+        weather.addAll(weatherList)
+    }
+
     override fun getDate(): Long {
-        return dt
+        return dt * 1000
     }
 
     override fun getOneWeatherList(): List<OneWeather> {

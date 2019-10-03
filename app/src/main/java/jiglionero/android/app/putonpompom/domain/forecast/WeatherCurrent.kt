@@ -1,39 +1,56 @@
 package jiglionero.android.app.putonpompom.domain.forecast
 
-import androidx.room.Relation
+
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import jiglionero.android.app.putonpompom.domain.OneWeather
 import jiglionero.android.app.putonpompom.domain.current.Clouds
 import jiglionero.android.app.putonpompom.domain.current.Weather
 import jiglionero.android.app.putonpompom.domain.current.Wind
-import jiglionero.android.app.putonpompom.domain.room.OneWeatherEntity
 
+@Entity
 data class WeatherCurrent(
-    val clouds: Clouds = Clouds(),
-    val dt: Int = 0,
-    val dt_txt: String = "",
-    val main: Main = Main(),
-    val rain: Rain = Rain(),
-    val sys: Sys = Sys(),
-    val weather: List<Weather> = listOf(),
-    val wind: Wind = Wind()
+    @Embedded
+    var clouds: Clouds = Clouds(),
+    var dt: Long = 0,
+    var dt_txt: String = "",
+    @Embedded
+    var main: Main = Main(),
+    @Embedded
+    var rain: Rain = Rain(),
+    @Embedded
+    var sys: Sys = Sys(),
+    @Ignore
+    var weather: ArrayList<Weather> = arrayListOf(Weather()),
+    @Embedded
+    var wind: Wind = Wind(),
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0
 ): OneWeather() {
-    fun toEntity(): OneWeatherEntity{
-        return OneWeatherEntity().apply {
-            dt = this@WeatherCurrent.dt
+    @Embedded
+    var weatherP: Weather = weather[0]
 
-        }
+    override fun getWeathers(): List<Weather> {
+        return weather
+    }
+
+    override fun setWeather(weatherList: List<Weather>) {
+        weather.clear()
+        weather.addAll(weatherList)
     }
 
     override fun getDate(): Long {
-        return dt
+        return dt * 1000
     }
 
     override fun getWeatherName(): String {
-        return weather[0].main
+        return weatherP.main
     }
 
     override fun getWeatherDescribe(): String {
-        return weather[0].description
+        return weatherP.description
     }
 
     override fun getPressure(): Double {

@@ -18,17 +18,17 @@ class WeatherPositionalDataSource(private val dataNode: DataNode) : PositionalDa
                     ", requestedLoadSize = " + params.requestedLoadSize
         )
         var result: List<OneWeather> = listOf()
-        if(dataNode.weatherApiResponseForecast5D3H.value != null) {
+        if(dataNode.forecastList.value != null) {
             var loadSize = params.requestedLoadSize
-            val listSize = dataNode.weatherApiResponseForecast5D3H.value!!.getOneWeatherList().size
+            val listSize = dataNode.forecastList.value!!.size
             if(params.requestedStartPosition + loadSize > listSize){
                 loadSize = listSize - params.requestedStartPosition
             }
             result =
-                dataNode.weatherApiResponseForecast5D3H.value?.getOneWeatherList()?.subList(
+                dataNode.forecastList.value!!.subList(
                     params.requestedStartPosition,
                     loadSize
-                )!!
+                )
         }
         if(params.placeholdersEnabled){
             callback.onResult(result, 0, result.count())
@@ -44,17 +44,17 @@ class WeatherPositionalDataSource(private val dataNode: DataNode) : PositionalDa
             "loadRange, startPosition = " + params.startPosition + ", loadSize = " + params.loadSize
         )
         var result: List<OneWeather> = listOf()
-        if(dataNode.weatherApiResponseForecast5D3H.value != null) {
+        if(dataNode.forecastList.value != null) {
             var loadSize = params.loadSize
-            val listSize = dataNode.weatherApiResponseForecast5D3H.value!!.getOneWeatherList().size
+            val listSize = dataNode.forecastList.value!!.size
             if(params.startPosition + loadSize > listSize){
                 loadSize = listSize - params.startPosition
             }
             result =
-                dataNode.weatherApiResponseForecast5D3H.value?.getOneWeatherList()?.subList(
+                dataNode.forecastList.value!!.subList(
                     params.startPosition,
                     loadSize
-                )!!
+                )
         }
         callback.onResult(result)
     }

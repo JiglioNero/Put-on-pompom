@@ -1,16 +1,17 @@
 package jiglionero.android.app.putonpompom.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
-import jiglionero.android.app.putonpompom.domain.room.OneWeatherEntity
+import jiglionero.android.app.putonpompom.domain.forecast.WeatherCurrent
 
 @Dao
 interface OneWeatherDao {
-    @Query("SELECT * FROM OneWeatherEntity")
-    fun getAll(): List<OneWeatherEntity>
+    @Query("SELECT * FROM WeatherCurrent ORDER BY WeatherCurrent.dt ASC")
+    fun getAll(): LiveData<List<WeatherCurrent>>
 
-    @Insert
-    fun insert(oneWeatherEntity: OneWeatherEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(entitys: List<WeatherCurrent>): Array<Long>
 
     @Delete
-    fun delete(oneWeatherEntity: OneWeatherEntity)
+    fun delete(entity: WeatherCurrent)
 }

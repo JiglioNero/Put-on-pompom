@@ -1,6 +1,7 @@
 package jiglionero.android.app.putonpompom.domain
 
 import androidx.lifecycle.MutableLiveData
+import jiglionero.android.app.putonpompom.domain.current.Weather
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,14 +17,15 @@ abstract class OneWeather {
     abstract fun getWindSpeed(): Double
     abstract fun getWeatherName(): String
     abstract fun getWeatherDescribe(): String
-    protected abstract fun getDate():Long
+    abstract fun getDate():Long
+    abstract fun getWeathers():List<Weather>
 
     fun getFormatTime(): String{
-        return SimpleDateFormat("HH:mm").format(Date(getDate()*1000))
+        return SimpleDateFormat("HH:mm").format(Date(getDate()))
     }
 
     fun getFormatDate(): String{
-        return SimpleDateFormat("dd:MMMM").format(Date(getDate()*1000))
+        return SimpleDateFormat("dd:MMMM").format(Date(getDate()))
     }
 
     fun getFormatTemp(): Double {
@@ -46,6 +48,8 @@ abstract class OneWeather {
         }
         return degreesNameUse
     }
+
+    abstract fun setWeather(weatherList: List<Weather>)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
