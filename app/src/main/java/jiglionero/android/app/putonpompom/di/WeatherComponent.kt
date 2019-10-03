@@ -15,7 +15,8 @@ import javax.inject.Singleton
     LocationModule::class,
     BackgroundModule::class,
     DataModule::class,
-    RecyclerModule::class])
+    RecyclerModule::class,
+    PreferencesModule::class])
 interface WeatherComponent {
     fun inject(weatherViewModel: WeatherCurrentViewModel)
     fun inject(locationWorker: LocationPeriodicWorker)

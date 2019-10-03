@@ -18,6 +18,7 @@ class WeatherPositionalDataSource(private val dataNode: DataNode) : PositionalDa
                     ", requestedLoadSize = " + params.requestedLoadSize
         )
         var result: List<OneWeather> = listOf()
+        var size = 0
         if(dataNode.forecastList.value != null) {
             var loadSize = params.requestedLoadSize
             val listSize = dataNode.forecastList.value!!.size
@@ -27,11 +28,12 @@ class WeatherPositionalDataSource(private val dataNode: DataNode) : PositionalDa
             result =
                 dataNode.forecastList.value!!.subList(
                     params.requestedStartPosition,
-                    loadSize
+                    params.requestedStartPosition + loadSize
                 )
+            size = listSize
         }
         if(params.placeholdersEnabled){
-            callback.onResult(result, 0, result.count())
+            callback.onResult(result, 0, size)
         }
         else {
             callback.onResult(result, 0)
@@ -53,7 +55,7 @@ class WeatherPositionalDataSource(private val dataNode: DataNode) : PositionalDa
             result =
                 dataNode.forecastList.value!!.subList(
                     params.startPosition,
-                    loadSize
+                    params.startPosition + loadSize
                 )
         }
         callback.onResult(result)

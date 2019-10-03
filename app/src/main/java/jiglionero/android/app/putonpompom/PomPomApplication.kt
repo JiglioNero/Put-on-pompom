@@ -2,10 +2,12 @@ package jiglionero.android.app.putonpompom
 
 import android.app.Activity
 import android.app.Application
+import android.content.SharedPreferences
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import jiglionero.android.app.putonpompom.di.DaggerWeatherComponent
 import jiglionero.android.app.putonpompom.di.WeatherComponent
+import jiglionero.android.app.putonpompom.domain.OneWeather
 import javax.inject.Inject
 
 
@@ -16,6 +18,7 @@ class PomPomApplication : Application() {
     lateinit var weatherComponent: WeatherComponent
     lateinit var currentActivity: Activity
     @Inject lateinit var locationPeriodicRequest: PeriodicWorkRequest
+    @Inject lateinit var sharedPreferences: SharedPreferences
 
 
 
@@ -25,6 +28,17 @@ class PomPomApplication : Application() {
         weatherComponent = DaggerWeatherComponent.create()
         weatherComponent.inject(this)
 
+        if (sharedPreferences.contains(resources.getString(R.string.preferences_key_degrees_name))){
+            var degName = sharedPreferences.getString(resources.getString(R.string.preferences_key_degrees_name), "")
+            degName?.let {
+                OneWeather.degreesNameUse.value = OneWeather.DegreesName.valueOf(it)
+            }
+        }
+        OneWeather.degreesNameUse.observeForever {
+            sharedPreferences.edit()
+                .putString(resources.getString(R.string.preferences_key_degrees_name), it.name)
+                .apply()
+        }
         WorkManager.getInstance().enqueue(locationPeriodicRequest)
     }
 }
