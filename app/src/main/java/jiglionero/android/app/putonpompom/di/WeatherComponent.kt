@@ -5,6 +5,7 @@ import jiglionero.android.app.putonpompom.PomPomApplication
 import jiglionero.android.app.putonpompom.model.WeatherCurrentViewModel
 import jiglionero.android.app.putonpompom.model.WeatherPerHourForecastViewModel
 import jiglionero.android.app.putonpompom.service.LocationPeriodicWorker
+import jiglionero.android.app.putonpompom.view.fragment.CurrentFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -19,7 +20,11 @@ import javax.inject.Singleton
     PreferencesModule::class])
 interface WeatherComponent {
     fun inject(weatherViewModel: WeatherCurrentViewModel)
-    fun inject(locationWorker: LocationPeriodicWorker)
-    fun inject(pomPomApplication: PomPomApplication)
     fun inject(weatherPerHourForecastViewModel: WeatherPerHourForecastViewModel)
+
+    fun inject(currentFragment: CurrentFragment)
+
+    fun inject(locationWorker: LocationPeriodicWorker)
+
+    fun inject(pomPomApplication: PomPomApplication)
 }

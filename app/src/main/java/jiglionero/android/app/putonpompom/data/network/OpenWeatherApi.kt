@@ -1,4 +1,4 @@
-package jiglionero.android.app.putonpompom.data
+package jiglionero.android.app.putonpompom.data.network
 
 import jiglionero.android.app.putonpompom.PomPomApplication
 import jiglionero.android.app.putonpompom.R

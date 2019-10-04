@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import jiglionero.android.app.putonpompom.PomPomApplication
 import jiglionero.android.app.putonpompom.R
-import jiglionero.android.app.putonpompom.data.OpenWeatherApi
+import jiglionero.android.app.putonpompom.data.network.OpenWeatherApi
 import retrofit2.Retrofit
 import javax.inject.Singleton
 

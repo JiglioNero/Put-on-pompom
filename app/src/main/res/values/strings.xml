@@ -6,5 +6,6 @@
     <string name="fahrenheit" translatable="false">F</string>
     <string name="config_file_name" translatable="false">config</string>
     <string name="preferences_key_degrees_name" translatable="false">preferences_key_degrees_name</string>
+    <string name="weather_upadete_notify">Weather start to update!</string>
 
 </resources>

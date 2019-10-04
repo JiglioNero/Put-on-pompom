@@ -24,7 +24,7 @@ class RecyclerModule{
     fun getPagedListConfig(): PagedList.Config{
         return PagedList.Config.Builder()
             .setPageSize(5)
-            .setEnablePlaceholders(true)
+            .setEnablePlaceholders(false)
             .build()
     }
 
