@@ -12,7 +12,7 @@ import javax.inject.Singleton
 class WeatherAPIModule {
 
     @Provides
-    fun baseUrl() = PomPomApplication.instance.resources.getString(R.string.base_weather_url)
+    fun baseUrl() = PomPomApplication.instance.resources.getString(R.string.base_weather_api_url)
 
     @Singleton
     @Provides

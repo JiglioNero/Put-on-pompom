@@ -151,6 +151,9 @@ class DataNode(private val weatherApi: OpenWeatherApi,
         weatherApiResponseCurrent.observeForever {
             weatherApiResponseForecast5D3H.value?.let { forecastResponse ->
                 val list = arrayListOf(it.toWeatherCurrent())
+                forecastResponse.list.forEach { listEl ->
+                    listEl.weatherP = listEl.weather[0]
+                }
                 list.addAll(forecastResponse.list)
                 Thread {
                     database.saveAllCurrentWeathers(list)
@@ -161,6 +164,9 @@ class DataNode(private val weatherApi: OpenWeatherApi,
         weatherApiResponseForecast5D3H.observeForever {
             weatherApiResponseCurrent.value?.let { currentResponse ->
                 val list = arrayListOf(currentResponse.toWeatherCurrent())
+                it.list.forEach { listEl ->
+                    listEl.weatherP = listEl.weather[0]
+                }
                 list.addAll(it.list)
                 Thread {
                     database.saveAllCurrentWeathers(list)

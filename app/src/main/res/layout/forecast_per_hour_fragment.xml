@@ -10,7 +10,6 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/per_hour_list"
-        style="@style/PerHourList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

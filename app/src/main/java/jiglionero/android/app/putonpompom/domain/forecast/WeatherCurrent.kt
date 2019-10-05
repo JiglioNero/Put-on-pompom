@@ -15,7 +15,7 @@ data class WeatherCurrent(
     @Embedded
     var clouds: Clouds = Clouds(),
     var dt: Long = 0,
-    var dt_txt: String = "",
+    var dt_txt: String = "blank",
     @Embedded
     var main: Main = Main(),
     @Embedded
@@ -27,10 +27,14 @@ data class WeatherCurrent(
     @Embedded
     var wind: Wind = Wind(),
     @PrimaryKey(autoGenerate = true)
-    var id: Long = 0
-): OneWeather() {
+    var id: Long = 0,
     @Embedded
-    var weatherP: Weather = weather[0]
+    var weatherP: Weather = Weather()
+): OneWeather() {
+
+    override fun getWeatherIconId(): String {
+        return weatherP.icon
+    }
 
     override fun getWeathers(): List<Weather> {
         return weather

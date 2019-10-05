@@ -8,7 +8,7 @@
     android:gravity="bottom"
     sothree:umanoPanelHeight="20dp"
     sothree:umanoShadowHeight="4dp"
-    sothree:umanoAnchorPoint="0.7"
+    sothree:umanoAnchorPoint="1"
     sothree:umanoOverlay="false"
     sothree:umanoScrollableView="@id/forecast_fragment"
     sothree:umanoDragView="@id/dragView">

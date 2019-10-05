@@ -10,15 +10,16 @@ import retrofit2.http.Query
 
 
 interface OpenWeatherApi{
-    @GET("weather")
+    @GET("data/2.5/weather")
     fun getCurrentWeather(@Query("lat") latitude:Double,
                           @Query("lon") longitude:Double,
                           @Query("APPID") appId: String = PomPomApplication.instance.resources.getString(R.string.app_id))
             : Call<WeatherApiResponseCurrent>
 
-    @GET("forecast")
+    @GET("data/2.5/forecast")
     fun getForecast5D3HWeather(@Query("lat") latitude:Double,
                           @Query("lon") longitude:Double,
                           @Query("APPID") appId: String = PomPomApplication.instance.resources.getString(R.string.app_id))
             : Call<WeatherApiResponseForecast5D3H>
+
 }

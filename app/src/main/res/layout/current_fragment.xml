@@ -29,7 +29,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:onClick="@{(view) -> weatherCurrentViewModel.oneWeather.switchDegreesName()}"
-                android:text="@{String.valueOf((int) weatherCurrentViewModel.oneWeather.getFormatTemp())}"
+                android:text="@{weatherCurrentViewModel.oneWeather.formatRoundedTemp}"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,13 +52,10 @@
                 style="@style/HumidityText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="8dp"
                 android:text="@{String.valueOf(weatherCurrentViewModel.oneWeather.getHumidity())}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/degree_sign"
+                app:layout_constraintEnd_toStartOf="@+id/textView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -66,13 +63,10 @@
                 style="@style/PressureText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="8dp"
                 android:text="@{String.valueOf((int)weatherCurrentViewModel.oneWeather.getPressure())}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/degree_sign"
+                app:layout_constraintEnd_toStartOf="@+id/textView4"
                 app:layout_constraintTop_toBottomOf="@+id/humidity" />
 
             <TextView
@@ -80,13 +74,10 @@
                 style="@style/WindText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="8dp"
                 android:text="@{String.valueOf(weatherCurrentViewModel.oneWeather.getWindSpeed())}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/degree_sign"
+                app:layout_constraintEnd_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/pressure" />
 
             <TextView
@@ -95,12 +86,61 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:text="@{weatherCurrentViewModel.oneWeather.getWeatherDescribe()}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/pressure"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintHorizontal_bias="0.524"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weather_icon" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/HumiditySign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/humidity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/humidity"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/PressureSign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/pressure"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pressure"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/WindSign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/wind_speed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/wind_speed"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/weather_icon"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitCenter"
+                app:WeatherIconId="@{weatherCurrentViewModel.oneWeather.weatherIconId}"
+                app:WeatherIconSize="@{2}"
+                app:layout_constraintEnd_toStartOf="@+id/wind_speed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/temp"
+                app:srcCompat="@drawable/icon_load_err" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

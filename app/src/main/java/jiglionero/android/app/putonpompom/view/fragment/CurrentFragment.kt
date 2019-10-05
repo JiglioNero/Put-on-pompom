@@ -1,6 +1,7 @@
 package jiglionero.android.app.putonpompom.view.fragment
 
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +53,9 @@ class CurrentFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         dataNode.isUpdateObservable.addOnPropertyChangedCallback(object :
             Observable.OnPropertyChangedCallback(){
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                swipeRefreshLayout.isRefreshing = dataNode.isUpdateObservable.get()
+                if(Looper.myLooper() == Looper.getMainLooper()) {
+                    swipeRefreshLayout.isRefreshing = dataNode.isUpdateObservable.get()
+                }
             }
         })
 

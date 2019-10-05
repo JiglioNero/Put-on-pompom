@@ -23,6 +23,10 @@
     <style name="OtherWhiteText">
         <item name="android:textSize">15sp</item>
     </style>
+    <style name="WeatherParamsText" parent="CurrentTemp">
+        <item name="android:textSize">15sp</item>
+    </style>
+
     <style name="CurrentTemp" parent="OtherWhiteText">
         <item name="android:inputType">number</item>
         <item name="android:textSize">50sp</item>
@@ -30,15 +34,21 @@
     <style name="NotCurrentTemp" parent="CurrentTemp">
         <item name="android:textSize">20sp</item>
     </style>
-    <style name="WeatherParamsText" parent="CurrentTemp">
-        <item name="android:textSize">15sp</item>
-    </style>
-
-
     <style name="DegSign" parent="OtherWhiteText">
         <item name="android:textSize">25sp</item>
         <item name="android:drawableStart">@drawable/deg_icon</item>
     </style>
+
+    <style name="HumiditySign" parent="OtherWhiteText">
+        <item name="android:text">%</item>
+    </style>
+    <style name="PressureSign" parent="OtherWhiteText">
+        <item name="android:text">@string/hPa</item>
+    </style>
+    <style name="WindSign" parent="OtherWhiteText">
+        <item name="android:text">@string/m_per_s</item>
+    </style>
+
     <style name="HumidityText" parent="OtherWhiteText">
         <item name="android:drawableStart">@drawable/humidity_icon</item>
     </style>
@@ -47,10 +57,6 @@
     </style>
     <style name="WindText" parent="OtherWhiteText">
         <item name="android:drawableStart">@drawable/wind_icon</item>
-    </style>
-
-    <style name="PerHourList">
-
     </style>
 
     <style name="WeatherData" parent="OtherWhiteText">

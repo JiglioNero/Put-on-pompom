@@ -18,6 +18,10 @@ data class WeatherApiResponseCurrent(
     val weather: ArrayList<Weather> = arrayListOf(Weather()),
     val wind: Wind = Wind()
 ): OneWeather(), WeatherApiResponse {
+    override fun getWeatherIconId(): String {
+        return weather[0].icon
+    }
+
     fun toWeatherCurrent(): WeatherCurrent{
         return WeatherCurrent(
             clouds = clouds,
@@ -29,7 +33,7 @@ data class WeatherApiResponseCurrent(
                 temp_max = main.temp_max,
                 temp_min = main.temp_min
             ),
-            weather = weather,
+            weatherP = weather[0],
             wind = wind
         )
     }

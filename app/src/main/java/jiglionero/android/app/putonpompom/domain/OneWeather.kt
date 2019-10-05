@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import jiglionero.android.app.putonpompom.domain.current.Weather
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.floor
+
 
 abstract class OneWeather {
     companion object{
@@ -11,12 +13,12 @@ abstract class OneWeather {
     }
 
     protected abstract fun getTemp(): Double
-
     abstract fun getPressure(): Double
     abstract fun getHumidity(): Int
     abstract fun getWindSpeed(): Double
     abstract fun getWeatherName(): String
     abstract fun getWeatherDescribe(): String
+    abstract fun getWeatherIconId(): String
     abstract fun getDate():Long
     abstract fun getWeathers():List<Weather>
 
@@ -26,6 +28,16 @@ abstract class OneWeather {
 
     fun getFormatDate(): String{
         return SimpleDateFormat("dd:MMMM").format(Date(getDate()))
+    }
+
+    fun getFormatRoundedTemp(): String {
+        val temp = getFormatTemp()
+        return if(floor(temp) == temp){
+            val t = temp.toInt()
+            String.format("$t")
+        } else {
+            String.format("%.1f", getFormatTemp())
+        }
     }
 
     fun getFormatTemp(): Double {
@@ -56,12 +68,13 @@ abstract class OneWeather {
         if (javaClass != other?.javaClass) return false
 
         var otherWeather = other as OneWeather
-        if(getFormatTemp().equals(otherWeather.getFormatTemp())) return false
-        if(getHumidity() == otherWeather.getHumidity()) return false
-        if(getPressure().equals(otherWeather.getPressure())) return false
-        if(getWindSpeed().equals(otherWeather.getWindSpeed())) return false
-        if(getWeatherName() == otherWeather.getWeatherName()) return false
-        if(getWeatherDescribe() == otherWeather.getWeatherDescribe()) return false
+        if(!getFormatTemp().equals(otherWeather.getFormatTemp())) return false
+        if(getHumidity() != otherWeather.getHumidity()) return false
+        if(!getPressure().equals(otherWeather.getPressure())) return false
+        if(!getWindSpeed().equals(otherWeather.getWindSpeed())) return false
+        if(getWeatherName() != otherWeather.getWeatherName()) return false
+        if(getWeatherDescribe() != otherWeather.getWeatherDescribe()) return false
+        if(getDate() != otherWeather.getDate()) return false
 
         return true
     }
