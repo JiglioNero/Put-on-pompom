@@ -3,6 +3,7 @@ package jiglionero.android.app.putonpompom.service
 import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
+import android.graphics.drawable.Icon
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import jiglionero.android.app.putonpompom.PomPomApplication
@@ -26,6 +27,7 @@ class LocationPeriodicWorker(context: Context, workerParams: WorkerParameters) :
             .setContentTitle(PomPomApplication.instance.getString(R.string.app_name))
             .setContentText(PomPomApplication.instance.getString(R.string.weather_upadete_notify))
             .setSmallIcon(R.drawable.deg_icon)
+            .setLargeIcon(Icon.createWithResource(PomPomApplication.instance, R.drawable.ic_knit_hat_with_pom_pom))
             .build()
 
         notificationManager.notify(0,noti)

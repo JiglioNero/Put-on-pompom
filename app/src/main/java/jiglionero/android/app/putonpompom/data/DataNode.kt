@@ -67,18 +67,10 @@ class DataNode(private val weatherApi: OpenWeatherApi,
                 isUpdateObservable.set(true)
             } else {
                 tryToGetPermissions()
-                if (isGetPermission()) {
-                    isUpdateObservable.set(true)
-                }
-                else{
-                    isUpdateObservable.set(false)
-                    isUpdateObservable.notifyChange()
-                }
             }
         }
         else{
             isUpdateObservable.set(false)
-            isUpdateObservable.notifyChange()
         }
     }
 

@@ -24,7 +24,7 @@ abstract class WeatherDatabase: RoomDatabase() {
                 break
             }
             else{
-                newList.remove(clist[i])
+                newList.removeAt(i)
             }
         }
         return newList

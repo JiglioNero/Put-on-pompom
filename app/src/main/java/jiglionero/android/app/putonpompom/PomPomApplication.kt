@@ -3,6 +3,7 @@ package jiglionero.android.app.putonpompom
 import android.app.Activity
 import android.app.Application
 import android.content.SharedPreferences
+import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import jiglionero.android.app.putonpompom.di.DaggerWeatherComponent
@@ -39,6 +40,6 @@ class PomPomApplication : Application() {
                 .putString(resources.getString(R.string.preferences_key_degrees_name), it.name)
                 .apply()
         }
-        WorkManager.getInstance().enqueue(locationPeriodicRequest)
+        WorkManager.getInstance().enqueueUniquePeriodicWork("locationUpdate", ExistingPeriodicWorkPolicy.REPLACE, locationPeriodicRequest)
     }
 }
