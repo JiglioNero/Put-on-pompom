@@ -29,6 +29,12 @@ class PomPomApplication : Application() {
         weatherComponent = DaggerWeatherComponent.create()
         weatherComponent.inject(this)
 
+        if (!sharedPreferences.contains(resources.getString(R.string.preferences_key_degrees_name))) {
+            sharedPreferences.edit()
+                .putString(resources.getString(R.string.preferences_key_degrees_name), OneWeather.degreesNameUse.value?.name)
+                .apply()
+        }
+
         if (sharedPreferences.contains(resources.getString(R.string.preferences_key_degrees_name))){
             var degName = sharedPreferences.getString(resources.getString(R.string.preferences_key_degrees_name), "")
             degName?.let {

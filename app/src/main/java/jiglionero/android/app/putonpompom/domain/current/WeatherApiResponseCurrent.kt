@@ -31,7 +31,8 @@ data class WeatherApiResponseCurrent(
                 pressure = main.pressure,
                 temp = main.temp,
                 temp_max = main.temp_max,
-                temp_min = main.temp_min
+                temp_min = main.temp_min,
+                feels_like = main.feels_like
             ),
             weatherP = weather[0],
             wind = wind

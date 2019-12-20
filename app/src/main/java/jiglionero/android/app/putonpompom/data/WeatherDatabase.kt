@@ -17,14 +17,15 @@ abstract class WeatherDatabase: RoomDatabase() {
 
     fun buildToActual(clist: List<WeatherCurrent>): ArrayList<WeatherCurrent>{
         val nowDate = Date()
-        var newList = arrayListOf<WeatherCurrent>()
+        val newList = arrayListOf<WeatherCurrent>()
         newList.addAll(clist)
-        for (i in 0 until clist.size-1){
-            if (nowDate.before(Date(clist[i+1].getDate()))){
-                break
-            }
-            else{
-                newList.removeAt(i)
+        if (newList.size >= 2) {
+            for (i in 0 until clist.size - 1) {
+                if (nowDate.before(Date(clist[i + 1].getDate()))) {
+                    break
+                } else {
+                    newList.removeAt(i)
+                }
             }
         }
         return newList
