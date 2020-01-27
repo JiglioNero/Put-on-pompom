@@ -20,11 +20,13 @@ abstract class WeatherDatabase: RoomDatabase() {
         val newList = arrayListOf<WeatherCurrent>()
         newList.addAll(clist)
         if (newList.size >= 2) {
+            var j = 0
             for (i in 0 until clist.size - 1) {
                 if (nowDate.before(Date(clist[i + 1].getDate()))) {
+                    j+=1
                     break
                 } else {
-                    newList.removeAt(i)
+                    newList.removeAt(j)
                 }
             }
         }
