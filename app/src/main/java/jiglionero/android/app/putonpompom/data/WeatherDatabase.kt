@@ -1,5 +1,6 @@
 package jiglionero.android.app.putonpompom.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Database
 import androidx.room.RoomDatabase
@@ -12,28 +13,17 @@ abstract class WeatherDatabase: RoomDatabase() {
     abstract fun oneWeatherDao(): OneWeatherDao
     
     fun getAllCurrentWeathersSortedByDate(): LiveData<List<WeatherCurrent>>{
+        Log.i("Database","getAllCurrentWeathersSortedByDate()")
         return oneWeatherDao().getAll()
     }
 
-    fun buildToActual(clist: List<WeatherCurrent>): ArrayList<WeatherCurrent>{
-        val nowDate = Date()
-        val newList = arrayListOf<WeatherCurrent>()
-        newList.addAll(clist)
-        if (newList.size >= 2) {
-            var j = 0
-            for (i in 0 until clist.size - 1) {
-                if (nowDate.before(Date(clist[i + 1].getDate()))) {
-                    j+=1
-                    break
-                } else {
-                    newList.removeAt(j)
-                }
-            }
-        }
-        return newList
+    fun getAllActualCurrentWeathersSortedByDate(): LiveData<List<WeatherCurrent>>{
+        Log.i("Database","getAllActualCurrentWeathersSortedByDate()")
+        return oneWeatherDao().getAllAfterDate(Date().time/1000)
     }
 
     @Synchronized fun saveAllCurrentWeathers(weatherCurrentList: List<WeatherCurrent>){
+        Log.i("Database","saveAllCurrentWeathers()")
         this.clearAllTables()
         oneWeatherDao().insert(weatherCurrentList)
     }

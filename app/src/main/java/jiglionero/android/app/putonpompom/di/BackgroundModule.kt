@@ -19,7 +19,7 @@ class BackgroundModule{
 
     @Provides
     fun getLocationPeriodicWorker(constraints: Constraints): PeriodicWorkRequest {
-        return PeriodicWorkRequest.Builder(LocationPeriodicWorker::class.java, 60, TimeUnit.MINUTES, 30, TimeUnit.MINUTES)
+        return PeriodicWorkRequest.Builder(LocationPeriodicWorker::class.java, 5, TimeUnit.SECONDS)
             .setConstraints(constraints)
             .addTag("location")
             .build()

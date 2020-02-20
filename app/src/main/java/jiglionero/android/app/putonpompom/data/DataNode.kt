@@ -41,23 +41,29 @@ class DataNode(private val weatherApi: OpenWeatherApi,
     private var weatherApiResponseCurrent: MutableLiveData<WeatherApiResponseCurrent> = MutableLiveData()
     private var weatherApiResponseForecast5D3H: MutableLiveData<WeatherApiResponseForecast5D3H> = MutableLiveData()
 
-    private var currentWeatherFromDB: LiveData<List<WeatherCurrent>> = database.getAllCurrentWeathersSortedByDate()
+    private var currentWeatherFromDB: LiveData<List<WeatherCurrent>> = database.getAllActualCurrentWeathersSortedByDate()
 
     var current: MutableLiveData<WeatherCurrent> = MutableLiveData()
     var forecastList: MutableLiveData<ArrayList<WeatherCurrent>> = MutableLiveData()
 
     init {
         initObserve()
+        buildResponseFromDB()
     }
 
     private fun buildResponseFromDB(){
         currentWeatherFromDB.value?.let {
-            val list = database.buildToActual(it)
+            val list = arrayListOf<WeatherCurrent>()
+            list.addAll(it)
             if(list.size>0) {
                 current.value = list[0]
                 list.removeAt(0)
                 forecastList.value = list
             }
+
+            println(currentWeatherFromDB.value)
+            println(current.value)
+            println(forecastList.value)
         }
     }
 
@@ -125,7 +131,7 @@ class DataNode(private val weatherApi: OpenWeatherApi,
             Observable.OnPropertyChangedCallback() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                 if(isUpdateObservable.get()) {
-                    Log.e("Location", "Start location update")
+                    Log.i("Location", "Start location update")
                     locationClient.requestLocationUpdates(
                         locationRequest,
                         locationCallback,
@@ -148,6 +154,7 @@ class DataNode(private val weatherApi: OpenWeatherApi,
                 }
                 list.addAll(forecastResponse.list)
                 Thread {
+                    Log.i("DataNode", "save to db")
                     database.saveAllCurrentWeathers(list)
                 }.start()
             }
@@ -161,6 +168,7 @@ class DataNode(private val weatherApi: OpenWeatherApi,
                 }
                 list.addAll(it.list)
                 Thread {
+                    Log.i("DataNode", "save to db")
                     database.saveAllCurrentWeathers(list)
                 }.start()
             }
